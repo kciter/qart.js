@@ -7,7 +7,7 @@ https://kciter.github.io/qart.js/
 
 ## Installation
 ```
-$ npm install qart
+$ npm install qartjs
 ```
 or clone this repository and copy `qart.min.js` to your project.
 
@@ -26,7 +26,7 @@ or clone this repository and copy `qart.min.js` to your project.
 
 ### In the ES6
 ```
-import QArt from 'qart';
+import QArt from 'qartjs';
 const qart = new QArt({
 	value: value,
 	imagePath: './example.png',
