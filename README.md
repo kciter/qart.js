@@ -39,8 +39,8 @@ qart.make(document.getElementById('qart'));
 |Field|Type|Description|Default|
 |-----|----|-----------|-------|
 |value|String|The data of the QR code.|*Required*|
-|imagePath|String|The path of the combined image|*Required*|
-|filter|String||threshold|
+|imagePath|String|The path of the combined image.|*Required*|
+|filter|String|Define an image filter. `threshold` or `color`|threshold|
 
 
 ## TODO
