@@ -42,6 +42,11 @@ qart.make(document.getElementById('qart'));
 |imagePath|String|The path of the combined image.|*Required*|
 |filter|String|Define an image filter. `threshold` or `color`|threshold|
 
+## Dependency
+* [qrcode](https://github.com/kazuhikoarase/qrcode-generator/tree/master/js)
+
+## Inspire
+* [CuteR](https://github.com/chinuno-usami/CuteR)
 
 ## TODO
 * [ ] Resize feature.
