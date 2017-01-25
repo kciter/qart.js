@@ -11,13 +11,6 @@ module.exports = {
 		publicPath: '../dist/'
 	},
 	module: {
-		// preLoaders: [
-		// 	{
-		// 		test: /\.js$/,
-		// 		loader: 'eslint',
-		// 		exclude: /node_modules/
-		// 	}
-		// ],
 		loaders: [
 	        {
 	            test: /\.js$/,
@@ -40,8 +33,5 @@ module.exports = {
             }
         })
 	],
-	// eslint: {
-	// 	formatter: require('eslint-friendly-formatter')
-	// },
 	devtool: 'inline-source-map'
 }
