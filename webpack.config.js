@@ -7,7 +7,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/dist',
-		filename: '[name].bundle.js',
+		filename: '[name].min.js',
 		publicPath: '../dist/'
 	},
 	module: {

@@ -37,7 +37,6 @@ class QArt {
     var self = this;
     qrImage.onload = function() {
         var coverImage = new Image();
-        // myImage.crossOrigin = 'anonymous';
         coverImage.src = self.imagePath;
 
         var resultCanvas = Util.createCanvas(imageSize, qrImage);
