@@ -2,3 +2,4 @@ example/
 .git*
 .DS_Store
 intro.png
+*.log
