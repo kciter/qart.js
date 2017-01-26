@@ -117,4 +117,4 @@ class QArt {
 }
 
 window.QArt = QArt;
-export default QArt;
+export default window.QArt;
