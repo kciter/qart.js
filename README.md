@@ -1,6 +1,12 @@
-<center><h1>qart.js</h1></center>
-<img src="intro.png">
+<h1 align="center">qart.js</h1>
+<p align="center">
+<a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/dt/qartjs.svg" alt="Downloads"></a>
+<a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/v/qartjs.svg" alt="Version"></a>
+<a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/l/qartjs.svg" alt="License"></a>
+<br>
 qart.js merge picture and QR code.
+</p>
+<img src="intro.png">
 
 ## Glance At
 https://kciter.github.io/qart.js/
