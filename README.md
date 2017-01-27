@@ -30,7 +30,7 @@ or clone this repository and copy `qart.min.js` to your project.
 </script>
 ```
 
-### In the ES6
+### With ES6
 ```
 import QArt from 'qartjs';
 const qart = new QArt({
@@ -40,6 +40,10 @@ const qart = new QArt({
 });
 qart.make(document.getElementById('qart'));
 ```
+
+### With Angular.JS
+
+There is a directive available for using quart.js in Angular.js: [angular-quart](https://github.com/isonet/angular-qart)
 
 ## Options
 |Field|Type|Description|Default|
