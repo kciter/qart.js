@@ -56,6 +56,7 @@ qart.make(document.getElementById('qart'));
 
 ## TODO
 * [ ] Resize feature.
+* [ ] Server-Side Rendering.
 
 ## LICENSE
 [GPLv3](LICENSE)
