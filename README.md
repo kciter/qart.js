@@ -31,7 +31,7 @@ or clone this repository and copy `qart.min.js` to your project.
 ```
 
 ### With ES6
-```
+```js
 import QArt from 'qartjs';
 const qart = new QArt({
 	value: value,
