@@ -43,7 +43,7 @@ qart.make(document.getElementById('qart'));
 
 ### With Angular.JS
 
-There is a directive available for using quart.js in Angular.js: [angular-quart](https://github.com/isonet/angular-qart)
+There is a directive available for using quart.js in Angular.js: [angular-qart](https://github.com/isonet/angular-qart)
 
 ## Options
 |Field|Type|Description|Default|
