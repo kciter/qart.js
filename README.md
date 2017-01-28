@@ -4,9 +4,10 @@
 <a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/v/qartjs.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/l/qartjs.svg" alt="License"></a>
 <br>
-qart.js merge picture and QR code.
+Merges Pictures and QR Codes for Artistic QR Codes.
+<br>
+<img src="intro.png" width="427">
 </p>
-<img src="intro.png">
 
 ## Glance At
 https://kciter.github.io/qart.js/
