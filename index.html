@@ -1,119 +1,145 @@
 <!doctype html>
 <html>
-	<head>
-		<title>QArt.js Example</title>
-		<style>
-			body {
-				width: 100%;
-				padding: 0;
-				background-color: #FFFFF6;
-			}
-			h1, h2 {
-				text-align: center;
-			}
+    <head>
+        <title>QArt.js Example</title>
+        <style>
+            body {
+                width: 100%;
+                padding: 0;
+                background-color: #FFFFF6;
+            }
+            h1, h2 {
+                text-align: center;
+            }
 
-			input[type=text] {
-				display: block;
-				width: 380px;
-				height: 30px;
-				margin: 0 auto;
-				font-size: 14pt;
-			}
-			label {
-				display: block;
-				width: 380px;
-				height: 30px;
-				margin: 0 auto;
-			}
+            input[type=text] {
+                display: block;
+                width: 380px;
+                height: 30px;
+                margin: 0 auto;
+                font-size: 14pt;
+            }
+            input[type=file] {
+                display: block;
+                width: 380px;
+                height: 30px;
+                margin: 0 auto;
+            }
+            label {
+                display: block;
+                width: 380px;
+                height: 30px;
+                margin: 0 auto;
+            }
 
-			.group {
-				width: 400px;
-				height: 195px;
-				margin: 0 auto;
-			}
-			.clear {
-				clear: both;
-			}
-			#qr {
-				float: left;
-				width: 195px;
-				height: 195px;
-				margin: 0 auto;
-				margin-right: 10px;
-			}
-			#image {
-				float: left;
-				width: 195px;
-				height: 195px;
-				margin: 0 auto;
-				margin-top: 12px;
-			}
+            .group {
+                width: 400px;
+                height: 195px;
+                margin: 0 auto;
+            }
+            .clear {
+                clear: both;
+            }
+            #qr {
+                float: left;
+                width: 195px;
+                height: 195px;
+                margin: 0 auto;
+                margin-right: 10px;
+            }
+            #image {
+                float: left;
+                width: 195px;
+                height: 195px;
+                margin: 0 auto;
+                margin-top: 12px;
+            }
 
-			#combine {
-				width: 195px;
-				height: 195px;
-				margin: 0 auto;
-			}
-		</style>
-	</head>
+            #combine {
+                width: 195px;
+                height: 195px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
 
-	<body>
-		<h1>QArt.js</h1>
+    <body>
+        <h1>QArt.js</h1>
 
-		<h2>From</h2>
-		<input id="value" type="text" value="https://github.com/kciter/qart.js">
-		<label>
-			Threshold: <input type="radio" value="threshold" name="filter" checked>
-			Color: <input type="radio" value="color" name="filter">
-		</label>
+        <h2>From</h2>
+        <input id="value" type="text" value="https://github.com/kciter/qart.js">
+        <input id="file" type="file">
+        <label>
+            Threshold: <input type="radio" value="threshold" name="filter" checked>
+            Color: <input type="radio" value="color" name="filter">
+        </label>
 
-		<div class="group">
-			<div id="qr"></div>
-			<div id="image"><img src="./example.png" width="171"></div>
-			<div class="clear"></div>
-		</div>
-		<h2>To</h2>
-		<div id="combine"></div>
+        <div class="group">
+            <div id="qr"></div>
+            <div id="image"><img src="./example.png" width="171"></div>
+            <div class="clear"></div>
+        </div>
+        <h2>To</h2>
+        <div id="combine"></div>
 
-		<script src="./qrcode.js"></script>
-	    <script src="./qart.min.js"></script>
-	    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	    <script>
-	    	$(document).ready(function() {
-	    		var value = 'https://github.com/kciter/qart.js';
-	    		var filter = 'threshold';
+        <script src="./qrcode.js"></script>
+        <script src="./qart.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var value = 'https://github.com/kciter/qart.js';
+                var filter = 'threshold';
+                var imagePath = './example.png';
 
-	    		var self = this;
+                var self = this;
 
-	    		function makeQR() {
-	    			var qr = qrcode.QRCode(10, 'H');
-				    qr.addData(value);
-				    qr.make();
-				    document.getElementById('qr').innerHTML = qr.createImgTag(3);
-	    		}
+                function makeQR() {
+                    var qr = qrcode.QRCode(10, 'H');
+                    qr.addData(value);
+                    qr.make();
+                    document.getElementById('qr').innerHTML = qr.createImgTag(3);
+                }
 
-	    		function makeQArt() {
-	    			new QArt({
-				    	value: value,
-				    	imagePath: './example.png',
-				    	filter: filter
-					}).make(document.getElementById('combine'));
-	    		}
+                function makeQArt() {
+                    new QArt({
+                        value: value,
+                        imagePath: imagePath,
+                        filter: filter
+                    }).make(document.getElementById('combine'));
+                }
 
-	    		$('#value').keydown(function() {
-	    			value = $(this).val();
-	    			makeQR();
-    				makeQArt();
-	    		});
+                function getBase64(file, callback) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        callback(reader.result);
+                    };
+                }
 
-	    		$('input[type=radio]').click(function() {
-	    			filter = $(this).val();
-	    			makeQArt();
-	    		});
+                $('#value').keyup(function() {
+                    value = $(this).val();
+                    makeQR();
+                    makeQArt();
+                });
 
-	    		makeQR();
-    			makeQArt();
-	    	});
-	    </script>
-	<body>
+                $('#file').change(function() {
+                    getBase64(this.files[0], function(base64Img) {
+                        var regex = /data:(.*);base64,(.*)/gm;
+                        var parts = regex.exec(base64Img);
+                        imagePath = parts[0];
+                        $('#image img').attr('src', imagePath);
+                        makeQArt();
+                    });
+                });
+
+                $('input[type=radio]').click(function() {
+                    filter = $(this).val();
+                    makeQArt();
+                });
+
+                makeQR();
+                makeQArt();
+            });
+        </script>
+    <body>
 </html>
