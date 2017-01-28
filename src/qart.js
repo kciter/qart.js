@@ -68,10 +68,10 @@ class QArt {
                 if (x%3 == 1 && y%3 == 1) {
                     continue;
                 }
-                if (x < 33 && (y < 33 || y >= imageSize-33)) {
+                if (x < 36 && (y < 36 || y >= imageSize-36)) {
                     continue;
                 }
-                if (x >= imageSize-33 && y < 33) {
+                if (x >= imageSize-36 && y < 36) {
                     continue;
                 }
 
