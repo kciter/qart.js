@@ -42,6 +42,9 @@ const qart = new QArt({
 qart.make(document.getElementById('qart'));
 ```
 
+### With React
+This is a simple implementation of QArt as React Component. [react-qart](https://github.com/BatuhanK/react-qart)
+
 ### With Angular.JS
 There is a directive available for using qart.js in Angular.js: [angular-qart](https://github.com/isonet/angular-qart)
 
