@@ -48,6 +48,9 @@ This is a simple implementation of QArt as React Component. [react-qart](https:/
 ### With Angular.JS
 There is a directive available for using qart.js in Angular.js: [angular-qart](https://github.com/isonet/angular-qart)
 
+### With Vue 2.x
+There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](https://github.com/superman66/vue-qart)
+
 ## Options
 |Field|Type|Description|Default|
 |-----|----|-----------|-------|
