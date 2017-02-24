@@ -13,10 +13,16 @@ Merges Pictures and QR Codes for Artistic QR Codes.
 https://kciter.github.io/qart.js/
 
 ## Installation
+### NPM
 ```
 $ npm install qartjs
 ```
 or clone this repository and copy `qart.min.js` to your project.
+
+### CDN
+```html
+<script src="//cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
+```
 
 ## Usage
 ### In the browser
