@@ -1,5 +1,6 @@
 <h1 align="center">qart.js</h1>
 <p align="center">
+<a href="https://cdnjs.com/libraries/qartjs"><img src="https://img.shields.io/cdnjs/v/qartjs.svg" alt="CDNJS"></a>
 <a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/dt/qartjs.svg" alt="Downloads"></a>
 <a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/v/qartjs.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/qartjs"><img src="https://img.shields.io/npm/l/qartjs.svg" alt="License"></a>
