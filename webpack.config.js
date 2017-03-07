@@ -45,7 +45,7 @@ module.exports = {
 		],
 	},
 	plugins: plugins,
-	devtool: 'inline-source-map',
+	devtool: 'cheap-module-source-map',
 	devServer: {
 		overlay: true
 	}
