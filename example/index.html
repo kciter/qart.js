@@ -68,8 +68,8 @@
         </label>
 
         <label>
-            Level:
-            <input id="level" type="number" value="10">
+            Version:
+            <input id="version" type="number" value="10">
         </label>
 
         <label>
@@ -98,15 +98,15 @@
                 var value = 'https://github.com/kciter/qart.js';
                 var filter = 'threshold';
                 var imagePath = './example.png';
-                var level = 10;
-                var imageSize = 75 + (level * 12) - 24;
+                var version = 10;
+                var imageSize = 75 + (version * 12) - 24;
 
                 var self = this;
 
                 $('#image img').width(imageSize);
 
                 function makeQR() {
-                    var qr = qrcode.QRCode(level, 'H');
+                    var qr = qrcode.QRCode(version, 'H');
                     qr.addData(value);
                     qr.make();
                     document.getElementById('qr').innerHTML = qr.createImgTag(3);
@@ -117,7 +117,7 @@
                         value: value,
                         imagePath: imagePath,
                         filter: filter,
-                        level: level
+                        version: version
                     }).make(document.getElementById('combine'));
                 }
 
@@ -135,10 +135,10 @@
                     makeQArt();
                 });
 
-                $('#level').bind('keyup change click', function() {
-                    console.log($('#level').val());
-                    level = $('#level').val();
-                    imageSize = 75 + (level * 12) - 24;
+                $('#version').bind('keyup change click', function() {
+                    console.log($('#version').val());
+                    version = $('#version').val();
+                    imageSize = 75 + (version * 12) - 24;
                     $('#image img').width(imageSize);
                     makeQR();
                     makeQArt();
