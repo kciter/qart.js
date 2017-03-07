@@ -15,20 +15,22 @@ class QArt {
     this.filter = (typeof options.filter === 'undefined') ? QArt.DEFAULTS.filter : options.filter;
     this.value = options.value;
     this.imagePath = options.imagePath;
+    this.level = (typeof options.level === 'undefined') ? QArt.DEFAULTS.level : options.level;
   }
 
   static get DEFAULTS() {
     return {
       // size: 195,
       value: '',
-      filter: 'threshold'
+      filter: 'threshold',
+      level: 10
     }
   }
 
   make(el) {
-    var imageSize = 195;
+    var level = this.level;
+    var imageSize = 75 + (level * 12);
     var padding = 12;
-    var level = 10;
 
     var qr = QRCode(level, 'H');
     qr.addData(this.value);

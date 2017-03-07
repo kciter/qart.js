@@ -91,14 +91,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.filter = typeof options.filter === 'undefined' ? QArt.DEFAULTS.filter : options.filter;
 	        this.value = options.value;
 	        this.imagePath = options.imagePath;
+	        this.level = typeof options.level === 'undefined' ? QArt.DEFAULTS.level : options.level;
 	    }
 
 	    (0, _createClass3.default)(QArt, [{
 	        key: 'make',
 	        value: function make(el) {
-	            var imageSize = 195;
+	            var level = this.level;
+	            var imageSize = 75 + level * 12;
 	            var padding = 12;
-	            var level = 10;
 
 	            var qr = (0, _qrcode.QRCode)(level, 'H');
 	            qr.addData(this.value);
@@ -192,7 +193,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        get: function get() {
 	            return {
 	                value: '',
-	                filter: 'threshold'
+	                filter: 'threshold',
+	                level: 10
 	            };
 	        }
 	    }]);

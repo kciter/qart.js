@@ -19,46 +19,41 @@
                 margin: 0 auto;
                 font-size: 14pt;
             }
+
+            input[type=number] {
+                display: block;
+                width: 380px;
+                height: 30px;
+                margin: 0 auto;
+                font-size: 14pt;
+            }
+
             input[type=file] {
                 display: block;
                 width: 380px;
                 height: 30px;
                 margin: 0 auto;
             }
+
             label {
                 display: block;
                 width: 380px;
-                height: 30px;
-                margin: 0 auto;
+                margin: 10px auto;
             }
 
             .group {
-                width: 400px;
-                height: 195px;
-                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .clear {
                 clear: both;
             }
             #qr {
-                float: left;
-                width: 195px;
-                height: 195px;
-                margin: 0 auto;
-                margin-right: 10px;
+                margin: 5px;
             }
             #image {
-                float: left;
-                width: 195px;
-                height: 195px;
-                margin: 0 auto;
-                margin-top: 12px;
-            }
-
-            #combine {
-                width: 195px;
-                height: 195px;
-                margin: 0 auto;
+                margin: 5px;
             }
         </style>
     </head>
@@ -67,8 +62,20 @@
         <h1>QAraasdft.js</h1>
 
         <h2>From</h2>
-        <input id="value" type="text" value="https://github.com/kciter/qart.js">
-        <input id="file" type="file">
+        <label>
+            Value: 
+            <input id="value" type="text" value="https://github.com/kciter/qart.js">
+        </label>
+
+        <label>
+            Level:
+            <input id="level" type="number" value="10">
+        </label>
+
+        <label>
+            <input id="file" type="file">
+        </label>
+
         <label>
             Threshold: <input type="radio" value="threshold" name="filter" checked>
             Color: <input type="radio" value="color" name="filter">
@@ -77,10 +84,11 @@
         <div class="group">
             <div id="qr"></div>
             <div id="image"><img src="./example.png" width="171"></div>
-            <div class="clear"></div>
         </div>
         <h2>To</h2>
-        <div id="combine"></div>
+        <div class="group">
+            <div id="combine"></div>
+        </div>
 
         <script src="../src/qrcode.js"></script>
         <script src="../dist/qart.js"></script>
@@ -90,11 +98,15 @@
                 var value = 'https://github.com/kciter/qart.js';
                 var filter = 'threshold';
                 var imagePath = './example.png';
+                var level = 10;
+                var imageSize = 75 + (level * 12) - 24;
 
                 var self = this;
 
+                $('#image img').width(imageSize);
+
                 function makeQR() {
-                    var qr = qrcode.QRCode(10, 'H');
+                    var qr = qrcode.QRCode(level, 'H');
                     qr.addData(value);
                     qr.make();
                     document.getElementById('qr').innerHTML = qr.createImgTag(3);
@@ -104,7 +116,8 @@
                     new QArt({
                         value: value,
                         imagePath: imagePath,
-                        filter: filter
+                        filter: filter,
+                        level: level
                     }).make(document.getElementById('combine'));
                 }
 
@@ -118,6 +131,15 @@
 
                 $('#value').keyup(function() {
                     value = $(this).val();
+                    makeQR();
+                    makeQArt();
+                });
+
+                $('#level').bind('keyup change click', function() {
+                    console.log($('#level').val());
+                    level = $('#level').val();
+                    imageSize = 75 + (level * 12) - 24;
+                    $('#image img').width(imageSize);
                     makeQR();
                     makeQArt();
                 });
@@ -138,7 +160,7 @@
                 });
 
                 makeQR();
-                makeQArt();f
+                makeQArt();
             });
         </script>
     <body>
