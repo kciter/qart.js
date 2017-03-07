@@ -19,7 +19,7 @@ class QArt {
 
   static get DEFAULTS() {
     return {
-      // size: 100,
+      // size: 195,
       value: '',
       filter: 'threshold'
     }
@@ -28,8 +28,9 @@ class QArt {
   make(el) {
     var imageSize = 195;
     var padding = 12;
+    var level = 10;
 
-    var qr = QRCode(10, 'H');
+    var qr = QRCode(level, 'H');
     qr.addData(this.value);
     qr.make();
     var qrImage = qr.createImgObject(3);
@@ -65,6 +66,10 @@ class QArt {
                 var x = Math.floor(i / 4) % imageSize;
                 var y = Math.floor(Math.floor(i / 4) / imageSize);
 
+                if (x < padding || y < padding || x >= imageSize-padding || y >= imageSize-padding) {
+                    resultImageBinary[i+3] = 0;
+                    continue;
+                }
                 if (x%3 == 1 && y%3 == 1) {
                     continue;
                 }
@@ -90,7 +95,7 @@ class QArt {
 
             resultCanvas.getContext('2d').putImageData(resultImageData, 0, 0);
 
-            var patternPostion = QRUtil.getPatternPosition(10);
+            var patternPostion = QRUtil.getPatternPosition(level);
             for (var i = 0; i < patternPostion.length; i += 1) {
                 for (var j = 0; j < patternPostion.length; j += 1) {
                     var x = patternPostion[i];

@@ -45,5 +45,8 @@ module.exports = {
 		],
 	},
 	plugins: plugins,
-	devtool: 'inline-source-map'
+	devtool: 'inline-source-map',
+	devServer: {
+		overlay: true
+	}
 }

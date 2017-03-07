@@ -3,18 +3,18 @@
   "version": "1.0.2",
   "description": "qart.js merge picture and QR code.",
   "keywords": [
-	  "qart",
-	  "qr",
-	  "qrcode"
+    "qart",
+    "qr",
+    "qrcode"
   ],
   "homepage": "https://github.com/kciter/qart.js",
   "bugs": {
-	  "url": "https://github.com/kciter/qart.js/issues",
-	  "email": "kciter@naver.com"
+    "url": "https://github.com/kciter/qart.js/issues",
+    "email": "kciter@naver.com"
   },
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/kciter/qart.js.git"
+    "type": "git",
+    "url": "https://github.com/kciter/qart.js.git"
   },
   "main": "dist/qart.min.js",
   "scripts": {
