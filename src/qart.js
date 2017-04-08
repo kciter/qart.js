@@ -1,4 +1,4 @@
-// import {QRCode, QRUtil} from './qrcode'
+
 import {QRCode, QRUtil} from './qrcode'
 import Util from './util'
 
