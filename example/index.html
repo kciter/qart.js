@@ -63,7 +63,7 @@
 
         <h2>From</h2>
         <label>
-            Value: 
+            Value:
             <input id="value" type="text" value="https://github.com/kciter/qart.js">
         </label>
 
@@ -92,7 +92,7 @@
 
         <script src="../src/qrcode.js"></script>
         <script src="../dist/qart.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
                 var value = 'https://github.com/kciter/qart.js';
@@ -106,7 +106,7 @@
                 $('#image img').width(imageSize);
 
                 function makeQR() {
-                    var qr = qrcode.QRCode(version, 'H');
+                    var qr = qrcode.qrcode(version, 'H');
                     qr.addData(value);
                     qr.make();
                     document.getElementById('qr').innerHTML = qr.createImgTag(3);
