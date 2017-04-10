@@ -205,7 +205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'DEFAULTS',
 	    get: function get() {
 	      return {
-	        size: 175,
+	        size: 195,
 	        value: '',
 	        filter: 'threshold',
 	        version: 10

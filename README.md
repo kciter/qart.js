@@ -34,7 +34,7 @@ or clone this repository and copy `qart.min.js` to your project.
     value: value,
     imagePath: './example.png',
     filter: filter,
-    size: 175
+    size: 195
 	}).make(document.getElementById('qart'));
 </script>
 ```
@@ -46,7 +46,7 @@ const qart = new QArt({
   value: value,
   imagePath: './example.png',
   filter: filter,
-  size: 175
+  size: 195
 });
 qart.make(document.getElementById('qart'));
 ```
@@ -66,7 +66,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 |value|String|The data of the QR code.|*Required*|
 |imagePath|String|The path of the combined image.|*Required*|
 |filter|String|Define an image filter. `threshold` or `color`|threshold|
-|size|Integer|Define an image size in pixels.|175
+|size|Integer|Define an image size in pixels.|195
 |version|Integer|QRCode version (1 <= version <= 40)|10|
 |background|CSSColor|Implement background if exist|undefinded
 
