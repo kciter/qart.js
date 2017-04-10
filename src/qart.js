@@ -1,4 +1,4 @@
-// import {QRCode, QRUtil} from './qrcode'
+
 import {QRCode, QRUtil} from './qrcode'
 import Util from './util'
 
@@ -45,6 +45,10 @@ class QArt {
 
       var resultCanvas = Util.createCanvas(imageSize, qrImage)
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
+      var bgCanvas = Util.createCanvas(imageSize, qrImage)
+      var bgCtx = bgCanvas.getContext('2d')
+      bgCtx.fillStyle = 'white'
+      bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height)
 
       coverImage.onload = function () {
         if (coverImage.width < coverImage.height) {
