@@ -68,6 +68,11 @@
         </label>
 
         <label>
+            Background:
+            <input id="bg" type="text" value="#C2C">
+        </label>
+
+        <label>
             Version:
             <input id="version" type="number" value="10">
         </label>
@@ -75,6 +80,8 @@
         <label>
             <input id="file" type="file">
         </label>
+
+
 
         <label>
             Threshold: <input type="radio" value="threshold" name="filter" checked>
@@ -92,7 +99,7 @@
 
         <script src="../src/qrcode.js"></script>
         <script src="../dist/qart.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script>
             $(document).ready(function() {
                 var value = 'https://github.com/kciter/qart.js';
@@ -100,6 +107,7 @@
                 var imagePath = './example.png';
                 var version = 10;
                 var imageSize = 75 + (version * 12) - 24;
+                var bg = "#C2C";
 
                 var self = this;
 
@@ -117,7 +125,8 @@
                         value: value,
                         imagePath: imagePath,
                         filter: filter,
-                        version: version
+                        version: version,
+                        background: bg
                     }).make(document.getElementById('combine'));
                 }
 
@@ -132,6 +141,11 @@
                 $('#value').keyup(function() {
                     value = $(this).val();
                     makeQR();
+                    makeQArt();
+                });
+
+                $('#bg').keyup(function() {
+                    bg = $(this).val();
                     makeQArt();
                 });
 

@@ -11,12 +11,12 @@ class QArt {
     } else if (typeof options.imagePath === 'undefined') {
       throw new TypeError('QArt required `imagePath` option.')
     }
-
     // this.size = (typeof options.size === 'undefined') ? QArt.DEFAULTS.size : options.size;
     this.filter = (typeof options.filter === 'undefined') ? QArt.DEFAULTS.filter : options.filter
     this.value = options.value
     this.imagePath = options.imagePath
     this.version = (typeof options.version === 'undefined') ? QArt.DEFAULTS.version : options.version
+    this.background = options.background
   }
 
   static get DEFAULTS () {
@@ -42,13 +42,15 @@ class QArt {
     qrImage.onload = function () {
       var coverImage = new Image()
       coverImage.src = self.imagePath
-
       var resultCanvas = Util.createCanvas(imageSize, qrImage)
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
-      var bgCanvas = Util.createCanvas(imageSize, qrImage)
-      var bgCtx = bgCanvas.getContext('2d')
-      bgCtx.fillStyle = 'white'
-      bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height)
+
+      if (typeof self.background !== 'undefined') {
+        var bgCanvas = Util.createCanvas(imageSize, qrImage)
+        var bgCtx = bgCanvas.getContext('2d')
+        bgCtx.fillStyle = self.background
+        bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height)
+      }
 
       coverImage.onload = function () {
         if (coverImage.width < coverImage.height) {
@@ -62,7 +64,9 @@ class QArt {
         var coverCanvas = document.createElement('canvas')
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
-        coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0)
+        if (typeof self.background !== 'undefined') {
+          coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0)
+        }
         coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2)
 
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)

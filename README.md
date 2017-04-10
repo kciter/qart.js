@@ -65,6 +65,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 |imagePath|String|The path of the combined image.|*Required*|
 |filter|String|Define an image filter. `threshold` or `color`|threshold|
 |version|Integer|QRCode version (1 <= version <= 40)|10|
+|background|CSSColor|Implement background if exist|undefinded
 
 ## Dependency
 * [qrcode](https://github.com/kazuhikoarase/qrcode-generator/tree/master/js)
