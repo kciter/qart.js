@@ -33,7 +33,8 @@ or clone this repository and copy `qart.min.js` to your project.
 	new QArt({
 		value: value,
 		imagePath: './example.png',
-		filter: filter
+		filter: filter,
+    size: 175
 	}).make(document.getElementById('qart'));
 </script>
 ```
@@ -44,7 +45,8 @@ import QArt from 'qartjs';
 const qart = new QArt({
 	value: value,
 	imagePath: './example.png',
-	filter: filter
+	filter: filter,
+  size: 175
 });
 qart.make(document.getElementById('qart'));
 ```
@@ -73,7 +75,6 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 * [CuteR](https://github.com/chinuno-usami/CuteR)
 
 ## TODO
-* [x] Resize feature.
 * [ ] Server-Side Rendering.
 * [ ] CLI Command.
 

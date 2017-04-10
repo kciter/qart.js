@@ -12,7 +12,7 @@ class QArt {
       throw new TypeError('QArt required `imagePath` option.')
     }
 
-    // this.size = (typeof options.size === 'undefined') ? QArt.DEFAULTS.size : options.size;
+    this.size = (typeof options.size === 'undefined') ? QArt.DEFAULTS.size : options.size
     this.filter = (typeof options.filter === 'undefined') ? QArt.DEFAULTS.filter : options.filter
     this.value = options.value
     this.imagePath = options.imagePath
@@ -21,7 +21,7 @@ class QArt {
 
   static get DEFAULTS () {
     return {
-      // size: 195,
+      size: 175,
       value: '',
       filter: 'threshold',
       version: 10
@@ -58,7 +58,6 @@ class QArt {
         var coverCanvas = document.createElement('canvas')
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
-        coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2)
 
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
         var coverImageBinary = coverImageData.data
@@ -115,10 +114,12 @@ class QArt {
           }
         }
 
-            // resultCanvas.width = self.size;
-            // resultCanvas.height = self.size;
+        var result = new Image()
+        var scaledCanvas = Util.createCanvas(self.size, result)
+        scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2)
+        scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size)
         el.innerHTML = ''
-        el.appendChild(resultCanvas)
+        el.appendChild(scaledCanvas)
       }
     }
   }

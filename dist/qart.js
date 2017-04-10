@@ -88,6 +88,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw new TypeError('QArt required `imagePath` option.');
 	    }
 
+	    this.size = typeof options.size === 'undefined' ? QArt.DEFAULTS.size : options.size;
 	    this.filter = typeof options.filter === 'undefined' ? QArt.DEFAULTS.filter : options.filter;
 	    this.value = options.value;
 	    this.imagePath = options.imagePath;
@@ -126,7 +127,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var coverCanvas = document.createElement('canvas');
 	          coverCanvas.width = imageSize;
 	          coverCanvas.height = imageSize;
-	          coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2);
 
 	          var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize);
 	          var coverImageBinary = coverImageData.data;
@@ -183,8 +183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	          }
 
+	          var result = new Image();
+	          var scaledCanvas = _util2.default.createCanvas(self.size, result);
+	          scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	          scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size);
 	          el.innerHTML = '';
-	          el.appendChild(resultCanvas);
+	          el.appendChild(scaledCanvas);
 	        };
 	      };
 	    }
@@ -192,6 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'DEFAULTS',
 	    get: function get() {
 	      return {
+	        size: 175,
 	        value: '',
 	        filter: 'threshold',
 	        version: 10
