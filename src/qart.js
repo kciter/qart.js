@@ -45,6 +45,10 @@ class QArt {
 
       var resultCanvas = Util.createCanvas(imageSize, qrImage)
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
+      var bgCanvas = Util.createCanvas(imageSize, qrImage)
+      var bgCtx = bgCanvas.getContext('2d')
+      bgCtx.fillStyle = 'white'
+      bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height)
 
       coverImage.onload = function () {
         if (coverImage.width < coverImage.height) {
@@ -58,6 +62,7 @@ class QArt {
         var coverCanvas = document.createElement('canvas')
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
+        coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0)
         coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2)
 
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)

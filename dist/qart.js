@@ -113,6 +113,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var resultCanvas = _util2.default.createCanvas(imageSize, qrImage);
 	        var qrCanvas = _util2.default.createCanvas(imageSize, qrImage);
+	        var bgCanvas = _util2.default.createCanvas(imageSize, qrImage);
+	        var bgCtx = bgCanvas.getContext('2d');
+	        bgCtx.fillStyle = 'white';
+	        bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
 
 	        coverImage.onload = function () {
 	          if (coverImage.width < coverImage.height) {
@@ -126,6 +130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var coverCanvas = document.createElement('canvas');
 	          coverCanvas.width = imageSize;
 	          coverCanvas.height = imageSize;
+	          coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0);
 	          coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2);
 
 	          var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize);
