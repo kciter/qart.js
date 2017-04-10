@@ -31,9 +31,9 @@ or clone this repository and copy `qart.min.js` to your project.
 <script src="../dist/qart.min.js"></script>
 <script>
 	new QArt({
-		value: value,
-		imagePath: './example.png',
-		filter: filter,
+    value: value,
+    imagePath: './example.png',
+    filter: filter,
     size: 175
 	}).make(document.getElementById('qart'));
 </script>
@@ -43,9 +43,9 @@ or clone this repository and copy `qart.min.js` to your project.
 ```js
 import QArt from 'qartjs';
 const qart = new QArt({
-	value: value,
-	imagePath: './example.png',
-	filter: filter,
+  value: value,
+  imagePath: './example.png',
+  filter: filter,
   size: 175
 });
 qart.make(document.getElementById('qart'));
@@ -68,6 +68,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 |filter|String|Define an image filter. `threshold` or `color`|threshold|
 |size|Integer|Define an image size in pixels.|175
 |version|Integer|QRCode version (1 <= version <= 40)|10|
+|background|CSSColor|Implement background if exist|undefinded
 
 ## Dependency
 * [qrcode](https://github.com/kazuhikoarase/qrcode-generator/tree/master/js)

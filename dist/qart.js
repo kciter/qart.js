@@ -93,6 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.value = options.value;
 	    this.imagePath = options.imagePath;
 	    this.version = typeof options.version === 'undefined' ? QArt.DEFAULTS.version : options.version;
+	    this.background = options.background;
 	  }
 
 	  (0, _createClass3.default)(QArt, [{
@@ -111,13 +112,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      qrImage.onload = function () {
 	        var coverImage = new Image();
 	        coverImage.src = self.imagePath;
-
 	        var resultCanvas = _util2.default.createCanvas(imageSize, qrImage);
 	        var qrCanvas = _util2.default.createCanvas(imageSize, qrImage);
-	        var bgCanvas = _util2.default.createCanvas(imageSize, qrImage);
-	        var bgCtx = bgCanvas.getContext('2d');
-	        bgCtx.fillStyle = 'white';
-	        bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+	        if (typeof self.background !== 'undefined') {
+	          var bgCanvas = _util2.default.createCanvas(self.size, new Image());
+	          var bgCtx = bgCanvas.getContext('2d');
+	          bgCtx.fillStyle = self.background;
+	          bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+	        }
 
 	        coverImage.onload = function () {
 	          if (coverImage.width < coverImage.height) {
@@ -187,8 +190,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	          }
 
-	          var result = new Image();
-	          var scaledCanvas = _util2.default.createCanvas(self.size, result);
+	          var scaledCanvas = _util2.default.createCanvas(self.size, new Image());
+	          if (typeof self.background !== 'undefined') {
+	            scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	          }
 	          scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2);
 	          scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size);
 	          el.innerHTML = '';
