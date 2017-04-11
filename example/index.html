@@ -73,6 +73,11 @@
         </label>
 
         <label>
+            Size:
+            <input id="size" type="number" value="195">
+        </label>
+
+        <label>
             Version:
             <input id="version" type="number" value="10">
         </label>
@@ -80,8 +85,6 @@
         <label>
             <input id="file" type="file">
         </label>
-
-
 
         <label>
             Threshold: <input type="radio" value="threshold" name="filter" checked>
@@ -108,6 +111,7 @@
                 var version = 10;
                 var imageSize = 75 + (version * 12) - 24;
                 var bg = "#C2C";
+                var size = "175";
 
                 var self = this;
 
@@ -126,7 +130,8 @@
                         imagePath: imagePath,
                         filter: filter,
                         version: version,
-                        background: bg
+                        background: bg,
+                        size: size
                     }).make(document.getElementById('combine'));
                 }
 
@@ -146,6 +151,11 @@
 
                 $('#bg').keyup(function() {
                     bg = $(this).val();
+                    makeQArt();
+                });
+
+                $('#size').keyup(function() {
+                    size = $(this).val();
                     makeQArt();
                 });
 

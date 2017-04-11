@@ -31,9 +31,10 @@ or clone this repository and copy `qart.min.js` to your project.
 <script src="../dist/qart.min.js"></script>
 <script>
 	new QArt({
-		value: value,
-		imagePath: './example.png',
-		filter: filter
+    value: value,
+    imagePath: './example.png',
+    filter: filter,
+    size: 195
 	}).make(document.getElementById('qart'));
 </script>
 ```
@@ -42,9 +43,10 @@ or clone this repository and copy `qart.min.js` to your project.
 ```js
 import QArt from 'qartjs';
 const qart = new QArt({
-	value: value,
-	imagePath: './example.png',
-	filter: filter
+  value: value,
+  imagePath: './example.png',
+  filter: filter,
+  size: 195
 });
 qart.make(document.getElementById('qart'));
 ```
@@ -64,6 +66,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 |value|String|The data of the QR code.|*Required*|
 |imagePath|String|The path of the combined image.|*Required*|
 |filter|String|Define an image filter. `threshold` or `color`|threshold|
+|size|Integer|Define an image size in pixels.|195
 |version|Integer|QRCode version (1 <= version <= 40)|10|
 |background|CSSColor|Implement background if exist|undefinded
 
@@ -74,7 +77,6 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 * [CuteR](https://github.com/chinuno-usami/CuteR)
 
 ## TODO
-* [x] Resize feature.
 * [ ] Server-Side Rendering.
 * [ ] CLI Command.
 

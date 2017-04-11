@@ -11,7 +11,8 @@ class QArt {
     } else if (typeof options.imagePath === 'undefined') {
       throw new TypeError('QArt required `imagePath` option.')
     }
-    // this.size = (typeof options.size === 'undefined') ? QArt.DEFAULTS.size : options.size;
+
+    this.size = (typeof options.size === 'undefined') ? QArt.DEFAULTS.size : options.size
     this.filter = (typeof options.filter === 'undefined') ? QArt.DEFAULTS.filter : options.filter
     this.value = options.value
     this.imagePath = options.imagePath
@@ -21,7 +22,7 @@ class QArt {
 
   static get DEFAULTS () {
     return {
-      // size: 195,
+      size: 195,
       value: '',
       filter: 'threshold',
       version: 10
@@ -46,7 +47,7 @@ class QArt {
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
 
       if (typeof self.background !== 'undefined') {
-        var bgCanvas = Util.createCanvas(imageSize, qrImage)
+        var bgCanvas = Util.createCanvas(self.size, new Image())
         var bgCtx = bgCanvas.getContext('2d')
         bgCtx.fillStyle = self.background
         bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height)
@@ -64,10 +65,6 @@ class QArt {
         var coverCanvas = document.createElement('canvas')
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
-        if (typeof self.background !== 'undefined') {
-          coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0)
-        }
-        coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2)
 
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
         var coverImageBinary = coverImageData.data
@@ -124,10 +121,14 @@ class QArt {
           }
         }
 
-            // resultCanvas.width = self.size;
-            // resultCanvas.height = self.size;
+        var scaledCanvas = Util.createCanvas(self.size, new Image())
+        if (typeof self.background !== 'undefined') {
+          scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2)
+        }
+        scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2)
+        scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size)
         el.innerHTML = ''
-        el.appendChild(resultCanvas)
+        el.appendChild(scaledCanvas)
       }
     }
   }

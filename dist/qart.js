@@ -88,6 +88,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw new TypeError('QArt required `imagePath` option.');
 	    }
 
+	    this.size = typeof options.size === 'undefined' ? QArt.DEFAULTS.size : options.size;
 	    this.filter = typeof options.filter === 'undefined' ? QArt.DEFAULTS.filter : options.filter;
 	    this.value = options.value;
 	    this.imagePath = options.imagePath;
@@ -115,7 +116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var qrCanvas = _util2.default.createCanvas(imageSize, qrImage);
 
 	        if (typeof self.background !== 'undefined') {
-	          var bgCanvas = _util2.default.createCanvas(imageSize, qrImage);
+	          var bgCanvas = _util2.default.createCanvas(self.size, new Image());
 	          var bgCtx = bgCanvas.getContext('2d');
 	          bgCtx.fillStyle = self.background;
 	          bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -133,10 +134,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var coverCanvas = document.createElement('canvas');
 	          coverCanvas.width = imageSize;
 	          coverCanvas.height = imageSize;
-	          if (typeof self.background !== 'undefined') {
-	            coverCanvas.getContext('2d').drawImage(bgCanvas, 0, 0);
-	          }
-	          coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - padding * 2, imageSize - padding * 2);
 
 	          var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize);
 	          var coverImageBinary = coverImageData.data;
@@ -193,8 +190,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	          }
 
+	          var scaledCanvas = _util2.default.createCanvas(self.size, new Image());
+	          if (typeof self.background !== 'undefined') {
+	            scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	          }
+	          scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	          scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size);
 	          el.innerHTML = '';
-	          el.appendChild(resultCanvas);
+	          el.appendChild(scaledCanvas);
 	        };
 	      };
 	    }
@@ -202,6 +205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'DEFAULTS',
 	    get: function get() {
 	      return {
+	        size: 195,
 	        value: '',
 	        filter: 'threshold',
 	        version: 10
