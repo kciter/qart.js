@@ -69,6 +69,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 |size|Integer|Define an image size in pixels.|195
 |version|Integer|QRCode version (1 <= version <= 40)|10|
 |background|CSSColor|Implement background if exist|undefinded
+|fillType|scale_to_fit/fill| Place image type(fill or scale to fit)|scale_to_fit
 
 ## Dependency
 * [qrcode](https://github.com/kazuhikoarase/qrcode-generator/tree/master/js)

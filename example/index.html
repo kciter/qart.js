@@ -83,6 +83,14 @@
         </label>
 
         <label>
+            Fill type:
+            <select id='fillType' name="fillType">
+              <option>scale_to_fit</option>
+              <option>fill</option>
+            </select>
+        </label>
+
+        <label>
             <input id="file" type="file">
         </label>
 
@@ -112,6 +120,7 @@
                 var imageSize = 75 + (version * 12) - 24;
                 var bg = "#C2C";
                 var size = "175";
+                var fillType = 'scale_to_fit';
 
                 var self = this;
 
@@ -131,7 +140,8 @@
                         filter: filter,
                         version: version,
                         background: bg,
-                        size: size
+                        size: size,
+                        fillType: fillType
                     }).make(document.getElementById('combine'));
                 }
 
@@ -158,6 +168,12 @@
                     size = $(this).val();
                     makeQArt();
                 });
+
+                $('#fillType').bind('change',function() {
+                    fillType = $(this).val();
+                    makeQArt();
+                });
+
 
                 $('#version').bind('keyup change click', function() {
                     console.log($('#version').val());

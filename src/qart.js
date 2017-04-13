@@ -17,6 +17,7 @@ class QArt {
     this.value = options.value
     this.imagePath = options.imagePath
     this.version = (typeof options.version === 'undefined') ? QArt.DEFAULTS.version : options.version
+    this.fillType = (typeof options.fillType === 'undefined') ? QArt.DEFAULTS.fillType : options.fillType
     this.background = options.background
   }
 
@@ -25,7 +26,8 @@ class QArt {
       size: 195,
       value: '',
       filter: 'threshold',
-      version: 10
+      version: 10,
+      fillType: 'scale_to_fit'
     }
   }
 
@@ -43,6 +45,11 @@ class QArt {
     qrImage.onload = function () {
       var coverImage = new Image()
       coverImage.src = self.imagePath
+
+      // handle image by fillType
+      var imageCanvas = Util.createCanvas(imageSize - padding * 2, coverImage, self.fillType)
+      coverImage.src = imageCanvas.toDataURL()
+
       var resultCanvas = Util.createCanvas(imageSize, qrImage)
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
 
