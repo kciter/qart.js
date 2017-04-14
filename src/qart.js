@@ -35,6 +35,8 @@ class QArt {
     var version = this.version
     var imageSize = 75 + (version * 12)
     var padding = 12
+    var scaledPadding = (padding * this.size) / imageSize
+
     QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
     var qr = QRCode(version, 'H')
     qr.addData(this.value)
@@ -130,9 +132,9 @@ class QArt {
 
         var scaledCanvas = Util.createCanvas(self.size, new Image())
         if (typeof self.background !== 'undefined') {
-          scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2)
+          scaledCanvas.getContext('2d').drawImage(bgCanvas, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2)
         }
-        scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2)
+        scaledCanvas.getContext('2d').drawImage(coverImage, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2)
         scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size)
         el.innerHTML = ''
         el.appendChild(scaledCanvas)
