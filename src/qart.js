@@ -17,6 +17,7 @@ class QArt {
     this.value = options.value
     this.imagePath = options.imagePath
     this.version = (typeof options.version === 'undefined') ? QArt.DEFAULTS.version : options.version
+    this.fillType = (typeof options.fillType === 'undefined') ? QArt.DEFAULTS.fillType : options.fillType
     this.background = options.background
   }
 
@@ -25,7 +26,8 @@ class QArt {
       size: 195,
       value: '',
       filter: 'threshold',
-      version: 10
+      version: 10,
+      fillType: 'scale_to_fit'
     }
   }
 
@@ -33,6 +35,8 @@ class QArt {
     var version = this.version
     var imageSize = 75 + (version * 12)
     var padding = 12
+    var scaledPadding = (padding * this.size) / imageSize
+
     QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
     var qr = QRCode(version, 'H')
     qr.addData(this.value)
@@ -43,6 +47,11 @@ class QArt {
     qrImage.onload = function () {
       var coverImage = new Image()
       coverImage.src = self.imagePath
+
+      // handle image by fillType
+      var imageCanvas = Util.createCanvas(imageSize - padding * 2, coverImage, self.fillType)
+      coverImage.src = imageCanvas.toDataURL()
+
       var resultCanvas = Util.createCanvas(imageSize, qrImage)
       var qrCanvas = Util.createCanvas(imageSize, qrImage)
 
@@ -123,9 +132,9 @@ class QArt {
 
         var scaledCanvas = Util.createCanvas(self.size, new Image())
         if (typeof self.background !== 'undefined') {
-          scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2)
+          scaledCanvas.getContext('2d').drawImage(bgCanvas, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2)
         }
-        scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2)
+        scaledCanvas.getContext('2d').drawImage(coverImage, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2)
         scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size)
         el.innerHTML = ''
         el.appendChild(scaledCanvas)

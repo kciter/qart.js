@@ -93,6 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.value = options.value;
 	    this.imagePath = options.imagePath;
 	    this.version = typeof options.version === 'undefined' ? QArt.DEFAULTS.version : options.version;
+	    this.fillType = typeof options.fillType === 'undefined' ? QArt.DEFAULTS.fillType : options.fillType;
 	    this.background = options.background;
 	  }
 
@@ -102,6 +103,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var version = this.version;
 	      var imageSize = 75 + version * 12;
 	      var padding = 12;
+	      var scaledPadding = padding * this.size / imageSize;
+
 	      _qrcode.QRCode.stringToBytes = _qrcode.QRCode.stringToBytesFuncs['UTF-8'];
 	      var qr = (0, _qrcode.QRCode)(version, 'H');
 	      qr.addData(this.value);
@@ -112,6 +115,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      qrImage.onload = function () {
 	        var coverImage = new Image();
 	        coverImage.src = self.imagePath;
+
+	        var imageCanvas = _util2.default.createCanvas(imageSize - padding * 2, coverImage, self.fillType);
+	        coverImage.src = imageCanvas.toDataURL();
+
 	        var resultCanvas = _util2.default.createCanvas(imageSize, qrImage);
 	        var qrCanvas = _util2.default.createCanvas(imageSize, qrImage);
 
@@ -192,9 +199,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	          var scaledCanvas = _util2.default.createCanvas(self.size, new Image());
 	          if (typeof self.background !== 'undefined') {
-	            scaledCanvas.getContext('2d').drawImage(bgCanvas, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	            scaledCanvas.getContext('2d').drawImage(bgCanvas, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2);
 	          }
-	          scaledCanvas.getContext('2d').drawImage(coverImage, padding, padding, self.size - padding * 2, self.size - padding * 2);
+	          scaledCanvas.getContext('2d').drawImage(coverImage, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2);
 	          scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size);
 	          el.innerHTML = '';
 	          el.appendChild(scaledCanvas);
@@ -208,7 +215,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        size: 195,
 	        value: '',
 	        filter: 'threshold',
-	        version: 10
+	        version: 10,
+	        fillType: 'scale_to_fit'
 	      };
 	    }
 	  }]);
@@ -3230,10 +3238,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  (0, _createClass3.default)(Util, null, [{
 	    key: 'createCanvas',
 	    value: function createCanvas(size, image) {
+	      var fillType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'fill';
+
 	      var canvas = document.createElement('canvas');
 	      canvas.width = size;
 	      canvas.height = size;
-	      canvas.getContext('2d').drawImage(image, 0, 0, size, size);
+	      switch (fillType) {
+	        case 'fill':
+	          canvas.getContext('2d').drawImage(image, 0, 0, size, size);
+	          break;
+	        case 'scale_to_fit':
+	          var wrh = image.width / image.height;
+	          var newWidth = canvas.width;
+	          var newHeight = newWidth / wrh;
+	          if (newHeight > canvas.height) {
+	            newHeight = canvas.height;
+	            newWidth = newHeight * wrh;
+	          }
+	          var x = (canvas.width - newWidth) * 0.5;
+	          var y = (canvas.height - newHeight) * 0.5;
+	          canvas.getContext('2d').drawImage(image, x, y, newWidth, newHeight);
+
+	          break;
+	      }
 	      return canvas;
 	    }
 	  }, {
