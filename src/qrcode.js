@@ -304,10 +304,12 @@ var qrcode = (function () {
       return data
     }
 
-    function CodeLengthOverflow(message){
+    function CodeLengthOverflow (message) {
       this.message = message
-      this.name = 'Verion Error'
+      this.name = 'CodeLengthOverflow'
     }
+
+    // CodeLengthOverflow.prototype = new Error();
 
     var createData = function (typeNumber, errorCorrectionLevel, dataList) {
       var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel)

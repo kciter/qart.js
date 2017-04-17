@@ -31,22 +31,39 @@ class QArt {
     }
   }
 
+  findWorkingVersion (currentVersion) {
+    var version = currentVersion
+    QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
+    var qr = QRCode(currentVersion, 'H')
+    for (var i = currentVersion; i <= 40; i++) {
+      try {
+        qr = QRCode(version, 'H')
+        qr.addData(this.value)
+        qr.make()
+      } catch (e) {
+        console.log('Error: ', e)
+        if (e.name === 'CodeLengthOverflow') {
+          version += 1
+          console.log('Can\'t create QRCode need up version, current version', version)
+          continue
+        } else { throw e }
+      }
+      return version
+    }
+  }
+
   make (el) {
-    var version = this.version
+    var version = this.findWorkingVersion(this.version)
+
+    var qr = QRCode(version, 'H')
+    qr.addData(this.value)
+    qr.make()
+    QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
+    var qrImage = qr.createImgObject(3)
+
     var imageSize = 75 + (version * 12)
     var padding = 12
     var scaledPadding = (padding * this.size) / imageSize
-
-    QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
-    var qr = QRCode(version, 'H')
-    qr.addData(this.value)
-    try {
-      qr.make()
-    }
-    catch (e if e instanceof CodeLengthOverflow) {
-
-    }
-    var qrImage = qr.createImgObject(3)
 
     var self = this
     qrImage.onload = function () {
