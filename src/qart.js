@@ -40,7 +40,12 @@ class QArt {
     QRCode.stringToBytes = QRCode.stringToBytesFuncs['UTF-8']
     var qr = QRCode(version, 'H')
     qr.addData(this.value)
-    qr.make()
+    try {
+      qr.make()
+    }
+    catch (e if e instanceof CodeLengthOverflow) {
+
+    }
     var qrImage = qr.createImgObject(3)
 
     var self = this

@@ -127,9 +127,23 @@
                 $('#image img').width(imageSize);
 
                 function makeQR() {
+                    console.log('Current version:', version)
                     var qr = qrcode.qrcode(version, 'H');
                     qr.addData(value);
-                    qr.make();
+                    try {
+
+                      qr.make();
+                      // код ...
+
+                    } catch (err) {
+                      console.log('Version is low:', version)
+                      console.log('Error:', err)
+                      version +=1
+                      $('#version').value = version
+                      makeQR()
+                      // обработка ошибки
+
+                    }
                     document.getElementById('qr').innerHTML = qr.createImgTag(3);
                 }
 

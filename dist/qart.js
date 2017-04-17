@@ -821,6 +821,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return data;
 	    };
 
+	    function CodeLengthOverflow(message) {
+	      this.message = message;
+	      this.name = 'Verion Error';
+	    }
+
 	    var createData = function createData(typeNumber, errorCorrectionLevel, dataList) {
 	      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
 
@@ -839,7 +844,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      if (buffer.getLengthInBits() > totalDataCount * 8) {
-	        throw new Error('code length overflow. (' + buffer.getLengthInBits() + '>' + totalDataCount * 8 + ')');
+	        throw new CodeLengthOverflow('code length overflow. (' + buffer.getLengthInBits() + '>' + totalDataCount * 8 + ')');
 	      }
 
 	      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
