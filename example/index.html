@@ -64,7 +64,8 @@
         <h2>From</h2>
         <label>
             Value:
-            <input id="value" type="text" value="https://github.com/kciter/qart.js">
+            <textarea id="value" type="text" rows="3" cols="45">https://github.com/kciter/qart.js
+             </textarea>
         </label>
 
         <label>
@@ -127,9 +128,17 @@
                 $('#image img').width(imageSize);
 
                 function makeQR() {
+                    // console.log('Current version:', version)
+                    qrcode.qrcode.stringToBytes = qrcode.qrcode.stringToBytesFuncs['UTF-8']
                     var qr = qrcode.qrcode(version, 'H');
                     qr.addData(value);
-                    qr.make();
+                    try {
+                      qr.make();
+
+                    } catch (err) {
+                      console.log('Version is low:', version)
+                      console.log('Error:', err)
+                    }
                     document.getElementById('qr').innerHTML = qr.createImgTag(3);
                 }
 

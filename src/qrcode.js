@@ -304,6 +304,13 @@ var qrcode = (function () {
       return data
     }
 
+    function CodeLengthOverflow (message) {
+      this.message = message
+      this.name = 'CodeLengthOverflow'
+    }
+
+    // CodeLengthOverflow.prototype = new Error();
+
     var createData = function (typeNumber, errorCorrectionLevel, dataList) {
       var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel)
 
@@ -323,7 +330,7 @@ var qrcode = (function () {
       }
 
       if (buffer.getLengthInBits() > totalDataCount * 8) {
-        throw new Error('code length overflow. (' +
+        throw new CodeLengthOverflow('code length overflow. (' +
           buffer.getLengthInBits() +
           '>' +
           totalDataCount * 8 +

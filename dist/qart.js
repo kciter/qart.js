@@ -98,18 +98,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  (0, _createClass3.default)(QArt, [{
+	    key: 'findWorkingVersion',
+	    value: function findWorkingVersion(currentVersion) {
+	      var version = currentVersion;
+	      _qrcode.QRCode.stringToBytes = _qrcode.QRCode.stringToBytesFuncs['UTF-8'];
+	      var qr = (0, _qrcode.QRCode)(currentVersion, 'H');
+	      for (var i = currentVersion; i <= 40; i++) {
+	        try {
+	          qr = (0, _qrcode.QRCode)(version, 'H');
+	          qr.addData(this.value);
+	          qr.make();
+	        } catch (e) {
+	          console.log('Error: ', e);
+	          if (e.name === 'CodeLengthOverflow') {
+	            version += 1;
+	            console.log('Can\'t create QRCode need up version, current version', version);
+	            continue;
+	          } else {
+	            throw e;
+	          }
+	        }
+	        return version;
+	      }
+	    }
+	  }, {
 	    key: 'make',
 	    value: function make(el) {
-	      var version = this.version;
-	      var imageSize = 75 + version * 12;
-	      var padding = 12;
-	      var scaledPadding = padding * this.size / imageSize;
+	      var version = this.findWorkingVersion(this.version);
 
-	      _qrcode.QRCode.stringToBytes = _qrcode.QRCode.stringToBytesFuncs['UTF-8'];
 	      var qr = (0, _qrcode.QRCode)(version, 'H');
 	      qr.addData(this.value);
 	      qr.make();
+	      _qrcode.QRCode.stringToBytes = _qrcode.QRCode.stringToBytesFuncs['UTF-8'];
 	      var qrImage = qr.createImgObject(3);
+
+	      var imageSize = 75 + version * 12;
+	      var padding = 12;
+	      var scaledPadding = padding * this.size / imageSize;
 
 	      var self = this;
 	      qrImage.onload = function () {
@@ -821,6 +846,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return data;
 	    };
 
+	    function CodeLengthOverflow(message) {
+	      this.message = message;
+	      this.name = 'CodeLengthOverflow';
+	    }
+
 	    var createData = function createData(typeNumber, errorCorrectionLevel, dataList) {
 	      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
 
@@ -839,7 +869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      if (buffer.getLengthInBits() > totalDataCount * 8) {
-	        throw new Error('code length overflow. (' + buffer.getLengthInBits() + '>' + totalDataCount * 8 + ')');
+	        throw new CodeLengthOverflow('code length overflow. (' + buffer.getLengthInBits() + '>' + totalDataCount * 8 + ')');
 	      }
 
 	      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
