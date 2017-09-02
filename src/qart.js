@@ -93,7 +93,7 @@ class QArt {
           coverImage.height = imageSize - padding * 2
         }
 
-        var coverCanvas = document.createElement('canvas')
+        var coverCanvas = Util.createCanvas(imageSize)
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
 

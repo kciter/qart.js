@@ -32,5 +32,8 @@
     "uglify-js": "^2.7.5",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "canvas": "^1.6.6"
   }
 }
