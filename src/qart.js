@@ -164,5 +164,7 @@ class QArt {
   }
 }
 
-window.QArt = QArt
-export default window.QArt
+if (window) {
+  window.QArt = QArt
+}
+export default QArt
