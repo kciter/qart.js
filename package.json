@@ -34,6 +34,6 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "canvas": "^1.6.6"
+    "canvas": "^2.0.0-alpha.4"
   }
 }
