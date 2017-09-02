@@ -38,12 +38,13 @@ or clone this repository and copy `qart.min.js` to your project.
 ```html
 <script src="../dist/qart.min.js"></script>
 <script>
-	new QArt({
+  var qart = new QArt({
     value: value,
     imagePath: './example.png',
     filter: filter,
     size: 195
-	}).make(document.getElementById('qart'));
+	}).make();
+  document.getElementById('qart').appendChild(qart);
 </script>
 ```
 
@@ -56,7 +57,7 @@ const qart = new QArt({
   filter: filter,
   size: 195
 });
-qart.make(document.getElementById('qart'));
+document.getElementById('qart').appendChild(qart.make());
 ```
 
 ### With React
