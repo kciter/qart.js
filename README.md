@@ -13,6 +13,13 @@ Merges Pictures and QR Codes for Artistic QR Codes.
 ## Glance At
 https://kciter.github.io/qart.js/
 
+
+## Support
+```
+Litecoin: LZSFLGDLe1pBxQB7v54kEcobYnu1uAR9U6
+Bitcoin: 1Hrauu2sPczma53gpYU4Y2kap5Hi6K3Ma3
+```
+
 ## Installation
 ### NPM
 ```
