@@ -14,13 +14,6 @@ Merges Pictures and QR Codes for Artistic QR Codes.
 https://kciter.github.io/qart.js/
 
 
-## Support
-If you like this open source, you can sponsor it. :smile:
-```
-Litecoin: LZSFLGDLe1pBxQB7v54kEcobYnu1uAR9U6
-Bitcoin: 1Hrauu2sPczma53gpYU4Y2kap5Hi6K3Ma3
-```
-
 ## Installation
 ### NPM
 ```
@@ -89,6 +82,11 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 ## TODO
 * [ ] Server-Side Rendering.
 * [ ] CLI Command.
+
+## Donate
+If you like this open source, you can sponsor it. :smile:
+
+[Paypal me](paypal.me/kciter)
 
 ## LICENSE
 [GPLv3](LICENSE)
