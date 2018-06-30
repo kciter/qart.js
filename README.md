@@ -86,7 +86,7 @@ There is a directive available for using qart.js in Vue.js 2.x : [vue-qart](http
 ## Donate
 If you like this open source, you can sponsor it. :smile:
 
-[Paypal me](paypal.me/kciter)
+[Paypal me](https://www.paypal.me/kciter)
 
 ## LICENSE
 [GPLv3](LICENSE)
