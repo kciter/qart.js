@@ -31,13 +31,23 @@ or clone this repository and copy `qart.min.js` to your project.
 ```html
 <script src="../dist/qart.min.js"></script>
 <script>
-  var qart = new QArt({
+  // directly appending canvas to the document
+  new QArt({
     value: value,
     imagePath: './example.png',
     filter: filter,
     size: 195
-	}).make();
-  document.getElementById('qart').appendChild(qart);
+	}).make(document.getElementById('qart'));
+
+	// using callback
+	new QArt({
+      value: value,
+      imagePath: './example.png',
+      filter: filter,
+      size: 195
+  	}).make(function (canvas) {
+  	  document.getElementById('qart').appendChild(canvas)
+  	});
 </script>
 ```
 
@@ -50,7 +60,14 @@ const qart = new QArt({
   filter: filter,
   size: 195
 });
-document.getElementById('qart').appendChild(qart.make());
+
+// directly appending canvas to the document
+qart.make(document.getElementById('qart'))
+
+// using callback
+qart.make((canvas) => {
+  document.getElementById('qart').appendChild(canvas);
+});
 ```
 
 ### With React
