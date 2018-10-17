@@ -97,6 +97,7 @@ class QArt {
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
 
+        coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - 2 * padding, imageSize - 2 * padding)
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
         var coverImageBinary = coverImageData.data
         var resultImageData = resultCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
