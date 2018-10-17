@@ -19,6 +19,7 @@
   "main": "dist/qart.min.js",
   "scripts": {
     "build": "WEBPACK_ENV=build webpack",
+    "build-win": "set WEBPACK_ENV=build && webpack",
     "dev": "WEBPACK_ENV=dev webpack --progress --colors --watch"
   },
   "author": "Lee Sun-Hyoup <kciter@naver.com>",
