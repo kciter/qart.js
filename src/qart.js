@@ -52,7 +52,7 @@ class QArt {
     }
   }
 
-  make () {
+  make (callback) {
     var version = this.findWorkingVersion(this.version)
 
     var qr = QRCode(version, 'H')
@@ -97,6 +97,7 @@ class QArt {
         coverCanvas.width = imageSize
         coverCanvas.height = imageSize
 
+        coverCanvas.getContext('2d').drawImage(coverImage, padding, padding, imageSize - 2 * padding, imageSize - 2 * padding)
         var coverImageData = coverCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
         var coverImageBinary = coverImageData.data
         var resultImageData = resultCanvas.getContext('2d').getImageData(0, 0, imageSize, imageSize)
@@ -158,7 +159,14 @@ class QArt {
         }
         scaledCanvas.getContext('2d').drawImage(coverImage, scaledPadding, scaledPadding, self.size - scaledPadding * 2, self.size - scaledPadding * 2)
         scaledCanvas.getContext('2d').drawImage(resultCanvas, 0, 0, self.size, self.size)
-        return scaledCanvas
+        if (callback instanceof Function) {
+          callback(scaledCanvas)
+        } else if (callback instanceof Element) {
+          callback.innerHTML = ''
+          callback.appendChild(scaledCanvas)
+        } else {
+          throw new TypeError('Parameter type of `make()` must be Function or Element.')
+        }
       }
     }
   }
