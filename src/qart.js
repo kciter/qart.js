@@ -68,6 +68,7 @@ class QArt {
     var self = this
     qrImage.onload = function () {
       var coverImage = new Image()
+      coverImage.crossOrigin = 'anonymous'
       coverImage.src = self.imagePath
 
       // handle image by fillType
